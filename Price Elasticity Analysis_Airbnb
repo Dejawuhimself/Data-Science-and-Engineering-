@@ -6,3 +6,62 @@ from statsmodels.api import OLS, add_constant
 
 # Read the Airbnb listing data. Source: U.S. Airbnb Open Data Kaggle
 listing_df = pd.read_csv('/Users/zacw/Downloads/AB_US_2023.csv')
+
+# Inspect the dataset for missing or invalid values
+# Check for null values in price and reviews_per_month
+print(listing_df.info())
+print(listing_df.describe())
+print(listing_df[['price', 'reviews_per_month']].isnull().sum())
+
+# Data cleaning: remove rows with null or zero values in price or reviews_per_month
+data = listing_df.dropna(subset=['price', 'reviews_per_month'])
+data = listing_df[listing_df['price'] > 0]
+
+#Handle outliers (e.g., listings with unusually high prices)
+data = data[data['price'] < data['price'].quantile(0.95)]  # Remove top 5% of prices
+
+Exploratory Data Analysis
+
+# Visualize the relationship between price and reviews_per_month
+
+sns.scatterplot(x='price', y='reviews_per_month', data=data, alpha=0.6)
+plt.title('Price vs. Reviews per Month')
+plt.xlabel('Price ($)')
+plt.ylabel('Reviews per Month')
+plt.show()
+
+# Check the distributions of price and reviews_per_month
+sns.histplot(data['price'], bins=50, kde=True)
+plt.title('Price Distribution')
+plt.show()
+
+sns.histplot(data['reviews_per_month'], bins=50, kde=True)
+plt.title('Reviews per Month Distribution')
+plt.show()
+
+Perform Regression Analysis
+# Define Segments
+# Segment the data by room_type or neighbourhood
+room_type_data = data[data['room_type'] == 'Entire home/apt']
+
+# Prepare Data for Regression
+# Add a constant column for regression intercept
+room_type_data['log_price'] = np.log(room_type_data['price'])  
+room_type_data['log_reviews'] = np.log(room_type_data['reviews_per_month'])
+X = add_constant(room_type_data['price'])
+y = room_type_data['reviews_per_month']
+
+# Run Regression
+# Fit the model
+model = OLS(y, X).fit()
+print(model.summary())
+
+# Identify Optimal Pricing Ranges
+# Use the regression equation to predict reviews_per_month for different price points.
+# Plot a graph to visualize how reviews_per_month changes with price
+
+predicted_reviews = model.predict(X)
+plt.plot(room_type_data['price'], predicted_reviews, color='red')
+sns.scatterplot(x='price', y='reviews_per_month', data=room_type_data, alpha=0.6)
+plt.title('Price vs. Predicted Reviews per Month')
+plt.show()
