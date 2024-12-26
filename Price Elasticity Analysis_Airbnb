@@ -4,3 +4,5 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from statsmodels.api import OLS, add_constant
 
+# Read the Airbnb listing data. Source: U.S. Airbnb Open Data Kaggle
+listing_df = pd.read_csv('/Users/zacw/Downloads/AB_US_2023.csv')
