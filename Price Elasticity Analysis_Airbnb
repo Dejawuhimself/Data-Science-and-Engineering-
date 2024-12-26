@@ -1,3 +1,5 @@
+# The purpose is to use regression to quantify the relationship between `price` and `reviews_per_month` to identify optimal pricing ranges for various `room_type` and `neighbourhood` segments
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
