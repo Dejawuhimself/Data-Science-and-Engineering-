@@ -1,4 +1,5 @@
 # The purpose is to use regression to quantify the relationship between `price` and `reviews_per_month` to identify optimal pricing ranges for various `room_type` and `neighbourhood` segments
+# Dataset: https://www.kaggle.com/datasets/kritikseth/us-airbnb-open-data?select=AB_US_2023.csv
 
 import pandas as pd
 import numpy as np
