@@ -1,0 +1,58 @@
+Provide an estimate for the amount of money we should expect to be paid out to each country on Jan. 1, 2019 (the day after the last day in the dataset).
+
+Get the Data
+import numpy as np
+import pandas as pd
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+df=pd.read_csv('/Users/zacw/Downloads/payouts.csv')
+df.head(10)
+
+df.describe()
+
+-------------------------------
+Visualize the Data
+df.plot()
+
+!pip install pystan prophet
+import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+import pandas as pd
+from prophet import Prophet
+import pandas as pd
+from prophet import Prophet
+
+df = pd.read_csv('/Users/zacw/Downloads/payouts.csv')
+df2 = pd.read_csv('/Users/zacw/Downloads/countries.csv')
+df1['ds'] = pd.to_datetime(df['date']).dt.date
+df1 = df.rename(columns={'platform_id': 'merchant_id'})
+df['ds'] = pd.to_datetime(df['date']).dt.date
+
+df.head(10)
+df['ds'] = pd.DatetimeIndex(df['ds'])
+df.dtypes
+df.drop(['date', 'platform_id', 'recipient_id', 'count'], axis=1, inplace=True)
+df.columns = ['y', 'ds']
+df.head()
+m = Prophet(yearly_seasonality=True)
+model = m.fit(df)
+
+df_merged = df_merged.rename(columns={'ds': 'ds','amount': 'y'})
+
+------------------------------
+forecast the future
+
+grouped = df_merged.groupby('country')
+final = pd.DataFrame()
+for g in grouped.groups:
+group = grouped.get_group(g)
+m = Prophet()
+m.fit(group)
+future = m.make_future_dataframe(periods=365)
+forecast = m.predict(future)
+forecast = forecast.rename(columns={'yhat': 'yhat_'+g})
+final = pd.merge(final, forecast.set_index('ds'), how='outer', left_index=T
+final = final[['yhat_' + g for g in grouped.groups.keys()]]
+
