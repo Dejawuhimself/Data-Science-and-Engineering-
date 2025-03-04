@@ -1,4 +1,6 @@
-Aviato Case Study
+Aviato Case Study (Aviato is a fictitious Operating System company that sells its OS to companies on a subscription basis)
+
+--Slide 1 
 The Problem
 Approach 
 Methodology
@@ -7,13 +9,15 @@ Recommendations
 
 2024/01/26
 
-Created and presented by Zac Wu
+Created by Zac Wu
 
+--Slide 2
 Problem statement
 - Does Customer Experience have an impact on growth of Aviato’s annual subscription revenue? If yes, which Customer Experience metrics influence annual subscription revenue growth?
 
 - What is the potential impact created (additional $ value) by providing better Customer Experience?
 
+--Slide 3
 Step-by-step approach
 Data Preparation and Cleaning 
 Consolidate data to include all the customer information & metrics
@@ -37,10 +41,7 @@ Break out by segment and industry
 Findings & Recommendations
 
 
-
-
-
-
+--Slide 4
 Map categorical values to numeric (0 or 1)
 For example, Knowledge Event
 
@@ -66,6 +67,7 @@ corr_knowledge, p_value_knowledge = pointbiserialr(df['OtherEvents Event'], df['
 
 OLS = Ordinary Least Squares
 
+--Slide 5
 Key Findings
 The analysis reveals that among all the Customer Experience metrics, the Average Net Promoter Score (NPS) seems to have the most impact on annual subscription revenue growth. It is also the only CX metric that has an impact on annual subscription revenue growth.
 The dependent variable is annual revenue growth in $. 
@@ -78,7 +80,7 @@ The analysis indicates that a minimum average NPS of 5.1 is required to achieve 
 With each point increase in NPS, customers are expected to have an additional annual revenue growth of $17,300.
 Investigating various customer segments and industries indicates positive correlations, with the average NPS exerting a bigger impact on revenue growth for Very Large Enterprise & Commercial customers and the Technology, Retail, and Wholesale industries compared to the overall average.
 
-
+--Slide 6
 Recommendations
 1. Focus on Improving NPS
 Given that NPS has the most significant impact on annual subscription revenue growth, the company Aviato should prioritize efforts to improve customer satisfaction and experience. 
